@@ -1,0 +1,16 @@
+
+<h1>{blog.title}</h1>
+
+<div class="blog-detail">
+
+    <p><f:format.stripTags>{blog.description}</f:format.stripTags></p>
+
+    <f:if condition="{blog.images}">
+        <f:image image="{blog.images}" width="600" />
+    </f:if>
+
+    <p>
+        <f:link.action action="list">Back to Blog List</f:link.action>
+    </p>
+
+</div>

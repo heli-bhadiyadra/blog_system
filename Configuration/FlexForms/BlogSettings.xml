@@ -1,0 +1,52 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <type>array</type>
+                <el>
+
+                    <settings.limit>
+                        <label>Number of records</label>
+                        <config>
+                            <type>input</type>
+                            <size>5</size>
+                            <eval>int</eval>
+                            <default>5</default>
+                        </config>
+                    </settings.limit>
+
+                    <settings.sortOrder>
+                        <label>Sorting Order</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Ascending</numIndex>
+                                    <numIndex index="1">ASC</numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">Descending</numIndex>
+                                    <numIndex index="1">DESC</numIndex>
+                                </numIndex>
+                            </items>
+                            <default>DESC</default>
+                        </config>
+                    </settings.sortOrder>
+
+                    <settings.storagePid>
+                        <label>Storage PID</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                        </config>
+                    </settings.storagePid>
+
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

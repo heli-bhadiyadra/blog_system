@@ -1,0 +1,138 @@
+{
+    "modules": [
+        {
+            "config": {
+                "position": [
+                    20,
+                    19.43359375
+                ]
+            },
+            "value": {
+                "name": "Blog",
+                "objectsettings": {
+                    "uid": 1070147858192,
+                    "type": "Entity",
+                    "aggregateRoot": false,
+                    "sorting": false,
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": ""
+                },
+                "actionGroup": {
+                    "_default0_index": false,
+                    "_default1_list": true,
+                    "_default2_show": true,
+                    "_default3_new_create": false,
+                    "_default4_edit_update": false,
+                    "_default5_delete": false,
+                    "customActions": []
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "uid": "1467576340991",
+                            "propertyName": "title",
+                            "propertyType": "String",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": false,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        },
+                        {
+                            "uid": "1216533544417",
+                            "propertyName": "description",
+                            "propertyType": "RichText",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": false,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        },
+                        {
+                            "uid": "516254676290",
+                            "propertyName": "images",
+                            "propertyType": "File",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": false,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        },
+                        {
+                            "uid": "653550036854",
+                            "propertyName": "createddate",
+                            "propertyType": "Date",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": false,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
+        }
+    ],
+    "wires": [],
+    "properties": {
+        "name": "blog_system",
+        "vendorName": "NITSAN",
+        "extensionKey": "ns_blog_system",
+        "originalExtensionKey": "ns_blog_system",
+        "originalVendorName": "NITSAN",
+        "description": "This is my blog system",
+        "emConf": {
+            "category": "",
+            "custom_category": "",
+            "version": "",
+            "state": "",
+            "disableVersioning": false,
+            "disableLocalization": false,
+            "generateDocumentationTemplate": false,
+            "generateEmptyGitRepository": false,
+            "generateEditorConfig": false,
+            "generateSiteSet": false,
+            "sourceLanguage": "",
+            "targetVersion": "",
+            "dependsOn": ""
+        },
+        "category": "",
+        "custom_category": "",
+        "version": "",
+        "state": "",
+        "disableVersioning": false,
+        "disableLocalization": false,
+        "generateDocumentationTemplate": false,
+        "generateEmptyGitRepository": false,
+        "generateEditorConfig": false,
+        "generateSiteSet": false,
+        "sourceLanguage": "",
+        "targetVersion": "",
+        "dependsOn": "",
+        "persons": [],
+        "plugins": [],
+        "backendModules": []
+    },
+    "storagePath": "\/var\/www\/html\/packages\/",
+    "log": {
+        "last_modified": "2026-04-16 03:38",
+        "extension_builder_version": "v13.1.0",
+        "be_user": " (1)"
+    }
+}

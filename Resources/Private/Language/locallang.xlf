@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:ns_blog_system/Resources/Private/Language/locallang.xlf" date="2026-04-16T12:49:03Z" product-name="ns_blog_system">
+		<header/>
+		<body>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog" resname="tx_nsblogsystem_domain_model_blog">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.description" resname="tx_nsblogsystem_domain_model_blog.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.title" resname="tx_nsblogsystem_domain_model_blog.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.title.description" resname="tx_nsblogsystem_domain_model_blog.title.description">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.description.description" resname="tx_nsblogsystem_domain_model_blog.description.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.images" resname="tx_nsblogsystem_domain_model_blog.images">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.images.description" resname="tx_nsblogsystem_domain_model_blog.images.description">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.createddate" resname="tx_nsblogsystem_domain_model_blog.createddate">
+				<source>Createddate</source>
+			</trans-unit>
+			<trans-unit id="tx_nsblogsystem_domain_model_blog.createddate.description" resname="tx_nsblogsystem_domain_model_blog.createddate.description">
+				<source>Createddate</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
