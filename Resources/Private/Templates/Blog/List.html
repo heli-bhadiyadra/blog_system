@@ -1,5 +1,11 @@
-<f:for each="{blogs}" as="blog">
+{namespace my=NITSAN\NsBlogSystem\ViewHelpers}
 
+<h2>
+    <my:uppercase text="my blogs" />
+</h2>
+
+<f:for each="{blogs}" as="blog">
+    
     <div class="blog-item">
 
         <!-- Title -->
