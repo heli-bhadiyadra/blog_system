@@ -19,7 +19,7 @@ return [
         'iconfile' => 'EXT:ns_blog_system/Resources/Public/Icons/tx_nsblogsystem_domain_model_blog.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, images, createddate, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => ['showitem' => 'title, description, images, createddate, comments, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -27,6 +27,24 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'language',
+            ],
+        ],
+        'comments' => [
+            'exclude' => 1,
+            'label' => 'Comments',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_nsblogsystem_domain_model_comment',
+                'foreign_field' => 'blog',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1,
+                    'useSortable' => true
+                ],
             ],
         ],
         'l10n_parent' => [

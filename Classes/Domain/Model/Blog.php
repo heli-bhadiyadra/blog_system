@@ -7,6 +7,8 @@ namespace NITSAN\NsBlogSystem\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
+use NITSAN\NsBlogSystem\Domain\Model\Comment;
+
 /**
  * This file is part of the "blog_system" Extension for TYPO3 CMS.
  *
@@ -50,6 +52,20 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \DateTime
      */
     protected $createddate = null;
+
+    /**
+     * comments
+     *
+     * @var ObjectStorage<Comment>
+     */
+    protected $comments = null;
+
+    public function initializeObject(): void
+    {
+        if ($this->comments === null) {
+            $this->comments = new ObjectStorage();
+        }
+    }
 
     /**
      * Returns the title
@@ -133,5 +149,36 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCreateddate(\DateTime $createddate)
     {
         $this->createddate = $createddate;
+    }
+
+    /**
+     * Returns the comments
+     *
+     * @return ObjectStorage<Comment>
+     */
+    public function getComments(): ObjectStorage
+    {
+        return $this->comments;
+    }
+    /**
+     * Adds a comment
+     *
+     * @param Comment $comment
+     * @return void
+     */
+    public function addComment(Comment $comment): void
+    {
+        $this->comments->attach($comment);
+    }
+
+    /**
+     * Removes a comment
+     *
+     * @param Comment $comment
+     * @return void
+     */
+    public function removeComment(Comment $comment): void
+    {
+        $this->comments->detach($comment);
     }
 }

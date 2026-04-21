@@ -1,0 +1,75 @@
+<style>
+.blog-form-container {
+    width: 450px;
+    margin: 40px auto;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.blog-form-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.blog-form-container label {
+    font-weight: bold;
+}
+
+.blog-form-container input[type="text"],
+.blog-form-container textarea,
+.blog-form-container input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+}
+
+.blog-form-container textarea {
+    height: 120px;
+}
+
+.save-btn {
+    text-align: center;
+}
+
+.blog-form-container input[type="submit"] {
+    background: #0a84ff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.blog-form-container input[type="submit"]:hover {
+    background: #0066cc;
+}
+</style>
+
+<div class="blog-form-container">
+
+<h1>Create Blog</h1>
+
+<f:form action="create" objectName="blog" enctype="multipart/form-data">
+
+    <label>Title</label>
+    <f:form.textfield property="title" />
+
+    <label>Description</label>
+    <f:form.textarea property="description" />
+
+    <label>Upload Image</label>
+    <f:form.upload property="images" />
+
+    <div class="save-btn">
+        <f:form.submit value="Save" />
+    </div>
+
+</f:form>
+
+</div>
