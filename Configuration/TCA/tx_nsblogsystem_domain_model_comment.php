@@ -70,6 +70,7 @@ return [
                 'foreign_table' => 'tx_nsblogsystem_domain_model_blog',
                 'minitems' => 0,
                 'maxitems' => 1,
+                'readOnly' => true, 
             ],
         ],
         'hidden' => [

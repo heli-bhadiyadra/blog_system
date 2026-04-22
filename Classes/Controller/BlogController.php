@@ -33,7 +33,7 @@ class BlogController extends ActionController
         $blogs = $this->blogRepository->findBlogs($limit, $sortOrder, $storagePid);
 
         $this->view->assign('blogs', $blogs);
-
+      
         return $this->htmlResponse();
     
     }
@@ -71,5 +71,28 @@ class BlogController extends ActionController
             'blog' => $blog->getUid()
         ]);
     }
+    public function filterAction(): \Psr\Http\Message\ResponseInterface
+    {
+    
+        $title = $this->request->hasArgument('title')
+            ? $this->request->getArgument('title')
+            : '';
+
+        if ($title !== '') {
+            $blogs = $this->blogRepository->findByTitle($title);
+        } else {
+            $blogs = $this->blogRepository->findAll();
+        }
+
+        $this->view->assignMultiple([
+            'blogs' => $blogs,
+            'showReadMore' => 0
+        ]);
+        
+        return $this->htmlResponse(
+            $this->view->renderPartial('Blog/BlogList', null, ['blogs' => $blogs])
+        );
+    }
+    
     
 }

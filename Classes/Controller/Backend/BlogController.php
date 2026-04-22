@@ -32,11 +32,9 @@ class BlogController extends ActionController
 
     public function listAction(): ResponseInterface
     {
+
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $this->pageRenderer->addJsFile(
-            'EXT:ns_blog_system/Resources/Public/JavaScript/delete-confirm.js'
-        );
-        
+        $pageRenderer->loadJavaScriptModule('@ns_blog_system/delete-confirm');
 
         $blogs = $this->blogRepository->findAll();
         $this->view->assign('blogs', $blogs);
@@ -71,12 +69,24 @@ class BlogController extends ActionController
         return $this->redirect('list');
     }
 
-    public function deleteAction(Blog $blog): ResponseInterface
+    /**public function deleteAction(Blog $blog): ResponseInterface
     {
         $this->blogRepository->remove($blog);
         $this->addFlashMessage(
             'Blog deleted successfully.',
         );
+
+        return $this->redirect('list');
+    }*/
+    
+    public function deleteAction(int $blog): ResponseInterface
+    {
+        $blogObject = $this->blogRepository->findByIdentifier($blog);
+
+        if ($blogObject) {
+            $this->blogRepository->remove($blogObject);
+            $this->addFlashMessage('Blog deleted successfully.');
+        }
 
         return $this->redirect('list');
     }

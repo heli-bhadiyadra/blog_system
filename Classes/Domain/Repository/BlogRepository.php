@@ -31,5 +31,17 @@ class BlogRepository extends Repository
 
         return $query->execute();
     }
+    public function findByTitle($title)
+    {
+        $query = $this->createQuery();
 
+        $querySettings = $query->getQuerySettings();
+        $querySettings->setRespectStoragePage(false);
+
+        $query->matching(
+            $query->like('title', '%' . $title . '%')
+        );
+
+        return $query->execute();
+    }
 }

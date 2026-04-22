@@ -1,34 +1,17 @@
 {namespace my=NITSAN\NsBlogSystem\ViewHelpers}
-
 <h2>
     <my:uppercase text="my blogs" />
 </h2>
 
-<f:for each="{blogs}" as="blog">
-    
-    <div class="blog-item">
+<h2>Search Blog</h2>
 
-        <!-- Title -->
-        <h2>{blog.title}</h2>
+<input type="text" id="searchBlog" placeholder="Search blog title">
+<br><br>
 
-        <!-- Image Preview -->
-        <f:if condition="{blog.images}">
+<div id="blogResults">
+    <f:render partial="Blog/BlogList" arguments="{blogs: blogs, showReadMore: 1}" />
+</div>
 
-            <f:image image="{blog.images}" width="300" />
-        </f:if>
 
-        <!-- Short Description -->
-        <p><f:format.stripTags>{blog.description}</f:format.stripTags></p>
-
-        <!-- Read More -->
-        <f:link.action action="show" arguments="{blog: blog}">
-            Read More
-        </f:link.action>
-
-    </div>
-
-    <hr>
-
-</f:for>
 
 

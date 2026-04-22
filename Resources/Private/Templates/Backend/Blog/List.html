@@ -5,6 +5,11 @@
         </div>
     </f:for>
 </f:flashMessages>
+
+<f:asset.script
+    identifier="delete-confirm"
+    src="EXT:ns_blog_system/Resources/Public/JavaScript/delete-confirm.js" />
+
 <h1 style="text-align:center">Blog List</h1>
 
 <f:form action="new">
@@ -46,19 +51,9 @@
            <button type="submit">Edit</button>
         </f:form>
 
-        
-        <!---<f:form action="delete" arguments="{blog: blog}" method="post"
-            onsubmit="return confirm('Are you sure you want to delete this blog?');"
-            style="display:inline-block">
-            
-            <button type="submit">Delete</button>
-        </f:form>-->
-        <f:form action="delete"
-                arguments="{blog: blog}"
-                class="js-confirm-delete"
-                style="display:inline-block">
+        <f:form action="delete" method="post" arguments="{blog: blog.uid}" style="display:inline-block">
 
-            <button type="submit">
+            <button type="button" class="delete-btn">
                 Delete
             </button>
 
@@ -70,3 +65,4 @@
 </f:for>
 
 </table>
+<script src="/js/delete-confirm.js"></script>

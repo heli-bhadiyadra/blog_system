@@ -7,14 +7,14 @@ call_user_func(function () {
     // Frontend plugin
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'NsBlogSystem',
-        'Bloglist',
+        'BlogList',
         [
             \NITSAN\NsBlogSystem\Controller\BlogController::class =>
-                'list, show, createComment'
+                'list, show, createComment, filter'
         ],
         [
             \NITSAN\NsBlogSystem\Controller\BlogController::class =>
-                'createComment'
+                'createComment, filter'
         ]
     );
 

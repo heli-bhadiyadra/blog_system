@@ -1,0 +1,20 @@
+<f:for each="{blogs}" as="blog">
+
+    <div class="blog-item">
+
+        <h3>{blog.title}</h3>
+
+        <f:if condition="{blog.images}">
+            <f:image image="{blog.images}" width="300" />
+        </f:if>
+
+        <p><f:format.stripTags>{blog.description}</f:format.stripTags></p>
+
+         <f:if condition="{showReadMore}">
+            <f:link.action action="show" arguments="{blog: blog}">
+                Read More
+            </f:link.action>
+        </f:if>
+    </div>
+    <hr>
+</f:for>

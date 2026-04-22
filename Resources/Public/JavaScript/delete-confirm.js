@@ -1,17 +1,14 @@
-document.addEventListener('DOMContentLoaded', function () {
+console.log('MODULE JS LOADED ✅');
 
-    document.querySelectorAll('.js-confirm-delete').forEach(function (form) {
+document.addEventListener('click', (event) => {
+    const btn = event.target.closest('.delete-btn');
+    if (!btn) return;
 
-        form.addEventListener('submit', function (e) {
+    console.log('DELETE CLICKED');
 
-            let ok = confirm('Are you sure you want to delete this blog?');
+    const form = btn.closest('form');
 
-            if (!ok) {
-                e.preventDefault();
-            }
-
-        });
-
-    });
-
+    if (confirm('Are you sure you want to delete this blog?')) {
+        form.submit();
+    }
 });

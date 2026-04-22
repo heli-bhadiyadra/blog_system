@@ -1,0 +1,26 @@
+page.includeJS.blogFilter = EXT:ns_blog_system/Resources/Public/JavaScript/filter.js
+
+config.cacheHash {
+  excludedParameters = tx_nsblogsystem_bloglist[title],tx_nsblogsystem_bloglist[action]
+}
+
+ajaxBlogFilter = PAGE
+ajaxBlogFilter {
+  typeNum = 123
+
+  config {
+    disableAllHeaderCode = 1
+    xhtml_cleaning = 0
+    admPanel = 0
+    debug = 0
+    no_cache = 1
+  }
+
+  10 = USER
+  10 {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = NsBlogSystem
+    pluginName = BlogList
+    vendorName = NITSAN
+  }
+}
