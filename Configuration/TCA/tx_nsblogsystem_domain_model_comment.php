@@ -63,16 +63,11 @@ return [
         ],
 
         'blog' => [
-            'label' => 'Blog',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_nsblogsystem_domain_model_blog',
-                'minitems' => 0,
-                'maxitems' => 1,
-                'readOnly' => true, 
+                'type' => 'passthrough',
             ],
         ],
+
         'hidden' => [
             'exclude' => true,
             'label' => 'Hidden',

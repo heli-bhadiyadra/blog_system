@@ -12,6 +12,9 @@ use NITSAN\NsBlogSystem\Domain\Model\Blog;
 use NITSAN\NsBlogSystem\Domain\Model\Comment;
 use NITSAN\NsBlogSystem\Domain\Repository\CommentRepository;
 
+use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Core\Pagination\ArrayPaginator;
+
 class BlogController extends ActionController
 {
     protected BlogRepository $blogRepository;
@@ -32,7 +35,23 @@ class BlogController extends ActionController
 
         $blogs = $this->blogRepository->findBlogs($limit, $sortOrder, $storagePid);
 
-        $this->view->assign('blogs', $blogs);
+        //Pagination
+        $blogsArray = $blogs->toArray();
+
+        $currentPage = $this->request->hasArgument('currentPage')
+            ? (int)$this->request->getArgument('currentPage')
+            : 1;
+
+        $itemsPerPage = 2;
+
+        $paginator = new ArrayPaginator($blogsArray, $currentPage, $itemsPerPage);
+        $pagination = new SimplePagination($paginator);
+
+        $this->view->assignMultiple([
+            'blogs' => $paginator->getPaginatedItems(),
+            'paginator' => $paginator,
+            'pagination' => $pagination
+        ]);
       
         return $this->htmlResponse();
     
@@ -71,6 +90,7 @@ class BlogController extends ActionController
             'blog' => $blog->getUid()
         ]);
     }
+    //Implement filtering by title
     public function filterAction(): \Psr\Http\Message\ResponseInterface
     {
     
@@ -84,13 +104,27 @@ class BlogController extends ActionController
             $blogs = $this->blogRepository->findAll();
         }
 
-        $this->view->assignMultiple([
-            'blogs' => $blogs,
-            'showReadMore' => 0
-        ]);
-        
+        // convert to array
+        $blogsArray = $blogs->toArray();
+
+        // get current page
+        $currentPage = $this->request->hasArgument('filterPage')
+            ? (int)$this->request->getArgument('filterPage')
+            : 1;
+
+        $itemsPerPage = 2;
+
+        $paginator = new ArrayPaginator($blogsArray, $currentPage, $itemsPerPage);
+        $pagination = new SimplePagination($paginator);
+
         return $this->htmlResponse(
-            $this->view->renderPartial('Blog/BlogList', null, ['blogs' => $blogs])
+            $this->view->renderPartial('Blog/BlogList', null, [
+                'blogs' => $paginator->getPaginatedItems(),
+                'pagination' => $pagination,
+                'paginator' => $paginator,
+                'showReadMore' => 0,
+                'title' => $title
+            ])
         );
     }
     

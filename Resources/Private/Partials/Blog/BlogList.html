@@ -18,3 +18,11 @@
     </div>
     <hr>
 </f:for>
+
+<f:if condition="{showReadMore}">
+    <f:render partial="Pagination/Blog" arguments="{pagination: pagination}" />
+</f:if>
+
+<f:if condition="!{showReadMore}">
+    <f:render partial="Pagination/Filter" arguments="{pagination: pagination, title: title}" />
+</f:if>

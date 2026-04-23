@@ -24,3 +24,9 @@ ajaxBlogFilter {
     vendorName = NITSAN
   }
 }
+
+plugin.tx_nsblogsystem {
+   settings {
+      listPid = 18
+   }
+}

@@ -1,4 +1,4 @@
-console.log('MODULE JS LOADED ✅');
+console.log('DELETE JS LOADED ');
 
 document.addEventListener('click', (event) => {
     const btn = event.target.closest('.delete-btn');

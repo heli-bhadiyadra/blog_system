@@ -2,16 +2,33 @@
 <h2>
     <my:uppercase text="my blogs" />
 </h2>
+<style>
+.pagination {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+}
 
+.pagination a,
+.pagination strong {
+    margin: 0 6px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+}
+
+.pagination strong {
+    background: #333;
+    color: #fff;
+}
+</style>
 <h2>Search Blog</h2>
 
 <input type="text" id="searchBlog" placeholder="Search blog title">
 <br><br>
 
 <div id="blogResults">
-    <f:render partial="Blog/BlogList" arguments="{blogs: blogs, showReadMore: 1}" />
+    <f:render partial="Blog/BlogList" arguments="{blogs: blogs, pagination: pagination, showReadMore: 1}" />
 </div>
-
-
 
 

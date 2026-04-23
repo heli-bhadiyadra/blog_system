@@ -1,0 +1,7 @@
+<div class="pagination">
+    <f:for each="{pagination.allPageNumbers}" as="page">
+        <f:link.action action="filter" pageUid="{settings.listPid}" arguments="{filterPage: page, title: title}">
+            {page}
+        </f:link.action>
+    </f:for>
+</div>

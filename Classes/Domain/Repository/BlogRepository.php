@@ -31,6 +31,7 @@ class BlogRepository extends Repository
 
         return $query->execute();
     }
+    //Implement filtering by title
     public function findByTitle($title)
     {
         $query = $this->createQuery();
