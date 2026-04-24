@@ -52,7 +52,7 @@ class BlogController extends ActionController
             'paginator' => $paginator,
             'pagination' => $pagination
         ]);
-      
+        
         return $this->htmlResponse();
     
     }
@@ -105,7 +105,7 @@ class BlogController extends ActionController
         }
 
         // convert to array
-        $blogsArray = $blogs->toArray();
+        $blogsArray = is_object($blogs) ? $blogs->toArray() : [];
 
         // get current page
         $currentPage = $this->request->hasArgument('filterPage')

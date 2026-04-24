@@ -1,7 +1,8 @@
 <div class="pagination">
     <f:for each="{pagination.allPageNumbers}" as="page">
-        <f:link.action action="filter" pageUid="{settings.listPid}" arguments="{filterPage: page, title: title}">
+        <a href="/index.php?type=123&tx_nsblogsystem_bloglist[action]=filter&tx_nsblogsystem_bloglist[controller]=Blog&tx_nsblogsystem_bloglist[filterPage]={page}&tx_nsblogsystem_bloglist[title]={title}"
+           class="page-link">
             {page}
-        </f:link.action>
+        </a>
     </f:for>
 </div>

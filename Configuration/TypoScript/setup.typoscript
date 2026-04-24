@@ -1,8 +1,7 @@
 page.includeJS.blogFilter = EXT:ns_blog_system/Resources/Public/JavaScript/filter.js
+page.includeJSFooter.blogPagination = EXT:ns_blog_system/Resources/Public/JavaScript/blog.js
 
-config.cacheHash {
-  excludedParameters = tx_nsblogsystem_bloglist[title],tx_nsblogsystem_bloglist[action]
-}
+config.cacheHash.excludedParameters >
 
 ajaxBlogFilter = PAGE
 ajaxBlogFilter {
@@ -30,3 +29,13 @@ plugin.tx_nsblogsystem {
       listPid = 18
    }
 }
+plugin.tx_nsblogsystem_bloglist {
+  features.skipDefaultArguments = 1
+  mvc.callDefaultActionIfActionCantBeResolved = 1
+
+    view {
+    format = html
+  }
+}
+
+config.tx_extbase.features.skipDefaultArguments >

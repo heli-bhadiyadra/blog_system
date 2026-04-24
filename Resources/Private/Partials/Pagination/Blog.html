@@ -1,7 +1,11 @@
 <div class="pagination">
-    <f:for each="{pagination.allPageNumbers}" as="page">
-        <f:link.action action="list" arguments="{currentPage: page}">
-            {page}
-        </f:link.action>
-    </f:for>
+<f:for each="{pagination.allPageNumbers}" as="page">
+    <f:link.action 
+        action="ajaxList" 
+        arguments="{currentPage: page}" 
+        class="page-link"
+        data-page="{page}">
+        {page}
+    </f:link.action>
+</f:for>
 </div>

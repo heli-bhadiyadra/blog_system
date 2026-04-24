@@ -1,9 +1,16 @@
 CREATE TABLE tx_nsblogsystem_domain_model_blog (
-	title varchar(255) NOT NULL DEFAULT '',
-	description text
+    uid int(11) NOT NULL auto_increment,
+    pid int(11) DEFAULT '0' NOT NULL,
 
+    title varchar(255) NOT NULL DEFAULT '',
+    description text,
+    slug varchar(2048) DEFAULT '' NOT NULL,
+
+    tstamp int(11) DEFAULT '0' NOT NULL,
+    crdate int(11) DEFAULT '0' NOT NULL,
+
+    PRIMARY KEY (uid)
 );
-
 CREATE TABLE tx_nsblogsystem_domain_model_comment (
     uid int(11) NOT NULL auto_increment,
     pid int(11) DEFAULT '0' NOT NULL,
