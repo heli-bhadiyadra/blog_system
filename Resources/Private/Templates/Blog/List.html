@@ -22,6 +22,7 @@
     color: #fff;
 }
 </style>
+<p>Today is <f:format.date format="Y-m-d">{f:format.date(date: 'now')}</f:format.date></p>
 <h2>Search Blog</h2>
 
 <input type="text" id="searchBlog" placeholder="Search blog title">
@@ -31,4 +32,5 @@
     <f:render partial="Blog/BlogList" arguments="{blogs: blogs, pagination: pagination, showReadMore: 1}" />
 </div>
 
+<f:cObject typoscriptObjectPath="lib.footer" />
 

@@ -80,7 +80,7 @@ form div {
     </p>
 
 </div>
-<h3>Add Comment</h3>
+<!---<h3>Add Comment</h3>
 
 <f:form action="createComment" controller="Blog" method="post">
 
@@ -94,6 +94,24 @@ form div {
 
     <label>Comment</label>
     <f:form.textarea name="comment[comment]" />
+
+    <f:form.submit value="Submit Comment" />
+
+</f:form>-->
+<h3>Add Comment</h3>
+
+<f:form action="createComment" controller="Blog" extensionName="NsBlogSystem" pluginName="BlogList" object="{comment}" method="post">
+
+    <f:form.hidden name="blog" value="{blog.uid}" />
+
+    <label>Name</label>
+    <f:form.textfield property="name" required="1" />
+
+    <label>Email</label>
+    <f:form.textfield property="email" required="1" />
+
+    <label>Comment</label>
+    <f:form.textarea property="comment" required="1" />
 
     <f:form.submit value="Submit Comment" />
 

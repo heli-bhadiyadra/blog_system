@@ -1,12 +1,31 @@
+//Filter by title
 page.includeJS.blogFilter = EXT:ns_blog_system/Resources/Public/JavaScript/filter.js
+
+//Blog pagination
 page.includeJSFooter.blogPagination = EXT:ns_blog_system/Resources/Public/JavaScript/blog.js
 
+//CSS
+page.includeCSS.blogStyle = EXT:ns_blog_system/Resources/Public/Css/style.css
+
+//Custom message
+page.includeJSFooter.custom = EXT:ns_blog_system/Resources/Public/JavaScript/custom.js
+
+//Add favicon
+page.shortcutIcon = EXT:ns_blog_system/Resources/Public/Images/favicon.ico
+
+//Add footer
+lib.footer = TEXT
+lib.footer.value = <div class="footer">© 2026 Blog</div>
+
+//CacheHash configuration
 config.cacheHash.excludedParameters >
 
+//Custom PAGE object (AJAX)
 ajaxBlogFilter = PAGE
 ajaxBlogFilter {
   typeNum = 123
 
+  //PAGE config settings
   config {
     disableAllHeaderCode = 1
     xhtml_cleaning = 0
@@ -15,6 +34,7 @@ ajaxBlogFilter {
     no_cache = 1
   }
 
+  //USER object (Extbase bootstrap)
   10 = USER
   10 {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
@@ -22,25 +42,42 @@ ajaxBlogFilter {
     pluginName = BlogList
     vendorName = NITSAN
   }
+
+  //Dynamic Date
+  20 = TEXT
+  20 {
+    data = date:Y-m-d
+    wrap = <p style="color:blue;">Today is |</p>
+  }
 }
 
+//Plugin settings
 plugin.tx_nsblogsystem {
    settings {
       listPid = 18
+   }
+   //for mail
+   view {
+      templateRootPaths.10 = EXT:ns_blog_system/Resources/Private/Templates/
+      partialRootPaths.10 = EXT:ns_blog_system/Resources/Private/Partials/
+      layoutRootPaths.10 = EXT:ns_blog_system/Resources/Private/Layouts/
    }
 }
 plugin.tx_nsblogsystem_bloglist {
   features.skipDefaultArguments = 1
   mvc.callDefaultActionIfActionCantBeResolved = 1
 
+  //View configuration
   view {
     format = html
   }
 
+  //Persistence configuration
   persistence {
         storagePid = 1
   }
 
+  //Features configuration
   features {
         nonCacheableActions {
             Blog = show

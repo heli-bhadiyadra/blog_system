@@ -18,6 +18,10 @@ use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use NITSAN\NsBlogSystem\Event\AfterBlogViewedEvent;
 
+use TYPO3\CMS\Core\Mail\FluidEmail;
+use TYPO3\CMS\Core\Mail\MailerInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class BlogController extends ActionController
 {
     protected BlogRepository $blogRepository;
@@ -99,6 +103,26 @@ class BlogController extends ActionController
         $comment->setApproved(false);
 
         $this->commentRepository->add($comment);
+
+        \TYPO3\CMS\Core\Utility\DebugUtility::debug('MAIL FUNCTION CALLED');
+
+        // SEND EMAIL TO ADMIN
+        $mail = GeneralUtility::makeInstance(FluidEmail::class);
+        
+        $mail
+            ->to('admin@example.com') 
+            ->from('noreply@example.com')
+            ->subject('New Comment Posted')
+            ->format('html')
+            ->setTemplate('CommentNotification')
+            ->assignMultiple([
+                'blogTitle' => $blog->getTitle(),
+                'name' => $comment->getName(),
+                'email' => $comment->getEmail(),
+                'comment' => $comment->getComment()
+            ]);
+
+        GeneralUtility::makeInstance(MailerInterface::class)->send($mail);
 
         return $this->redirect('show', null, null, [
             'blog' => $blog->getUid()
