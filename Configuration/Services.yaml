@@ -6,3 +6,8 @@ services:
 
   NITSAN\NsBlogSystem\:
     resource: '../Classes/*'
+
+  NITSAN\NsBlogSystem\EventListener\BlogViewCounterListener:
+    tags:
+      - name: event.listener
+        identifier: 'blog-view-counter'

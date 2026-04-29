@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const search = document.getElementById("searchBlog");
 
+    if (!search) return;   // Prevent error if element doesn't exist
+
     search.addEventListener("keyup", function () {
 
         let title = this.value;
@@ -18,7 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.text())
         .then(data => {
-            document.getElementById("blogResults").innerHTML = data;
+            const results = document.getElementById("blogResults");
+            if (results) {
+                results.innerHTML = data;
+            }
         });
 
     });

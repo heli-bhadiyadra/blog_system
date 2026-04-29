@@ -4,6 +4,7 @@ CREATE TABLE tx_nsblogsystem_domain_model_blog (
 
     title varchar(255) NOT NULL DEFAULT '',
     description text,
+    views int(11) DEFAULT 0 NOT NULL,
     slug varchar(2048) DEFAULT '' NOT NULL,
 
     tstamp int(11) DEFAULT '0' NOT NULL,

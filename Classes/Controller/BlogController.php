@@ -15,13 +15,22 @@ use NITSAN\NsBlogSystem\Domain\Repository\CommentRepository;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
+use NITSAN\NsBlogSystem\Event\AfterBlogViewedEvent;
+
 class BlogController extends ActionController
 {
     protected BlogRepository $blogRepository;
 
     protected CommentRepository $commentRepository;
 
+    //Event
+    protected EventDispatcherInterface $eventDispatcher;
 
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
     public function injectBlogRepository(BlogRepository $blogRepository)
     {
         $this->blogRepository = $blogRepository;
@@ -59,7 +68,12 @@ class BlogController extends ActionController
 
     public function showAction(Blog $blog): ResponseInterface
     {
-         $this->view->assignMultiple([
+        //Event
+        $event = new AfterBlogViewedEvent($blog);
+
+        $this->eventDispatcher->dispatch($event);
+
+        $this->view->assignMultiple([
             'blog' => $blog,
             'comment' => new \NITSAN\NsBlogSystem\Domain\Model\Comment()
         ]);

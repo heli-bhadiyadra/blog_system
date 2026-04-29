@@ -150,7 +150,12 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->createddate = $createddate;
     }
-
+    /**
+     * views
+     *
+     * @var int
+     */
+    protected $views = 0;
     /**
      * Returns the comments
      *
@@ -180,5 +185,25 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function removeComment(Comment $comment): void
     {
         $this->comments->detach($comment);
+    }
+    /**
+     * Returns the views
+     *
+     * @return int
+     */
+    public function getViews(): int
+    {
+        return $this->views;
+    }
+
+    /**
+     * Sets the views
+     *
+     * @param int $views
+     * @return void
+     */
+    public function setViews(int $views): void
+    {
+        $this->views = $views;
     }
 }

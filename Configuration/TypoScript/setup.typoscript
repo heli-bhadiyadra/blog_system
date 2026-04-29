@@ -33,8 +33,18 @@ plugin.tx_nsblogsystem_bloglist {
   features.skipDefaultArguments = 1
   mvc.callDefaultActionIfActionCantBeResolved = 1
 
-    view {
+  view {
     format = html
+  }
+
+  persistence {
+        storagePid = 1
+  }
+
+  features {
+        nonCacheableActions {
+            Blog = show
+    }
   }
 }
 

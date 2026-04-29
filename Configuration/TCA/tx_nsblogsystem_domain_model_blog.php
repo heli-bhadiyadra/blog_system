@@ -152,6 +152,15 @@ return [
             ],
             
         ],
+        'views' => [
+            'exclude' => true,
+            'label' => 'Views',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'int',
+                'default' => 0,
+            ],
+        ],
         'images' => [
             'exclude' => true,
             'label' => 'LLL:EXT:ns_blog_system/Resources/Private/Language/locallang_db.xlf:tx_nsblogsystem_domain_model_blog.images',

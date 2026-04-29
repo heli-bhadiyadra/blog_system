@@ -68,16 +68,6 @@ class BlogController extends ActionController
         );
         return $this->redirect('list');
     }
-
-    /**public function deleteAction(Blog $blog): ResponseInterface
-    {
-        $this->blogRepository->remove($blog);
-        $this->addFlashMessage(
-            'Blog deleted successfully.',
-        );
-
-        return $this->redirect('list');
-    }*/
     
     public function deleteAction(int $blog): ResponseInterface
     {
