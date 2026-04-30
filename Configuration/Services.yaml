@@ -11,3 +11,14 @@ services:
     tags:
       - name: event.listener
         identifier: 'blog-view-counter'
+  
+  NITSAN\NsBlogSystem\EventListener\CoreRequestListener:
+    tags:
+      - name: event.listener
+        identifier: 'blog-core-request'
+
+  NITSAN\NsBlogSystem\Command\ResetBlogViewsCommand:
+    tags:
+      - name: 'console.command'
+        command: 'nsblog:resetviews'
+        description: 'Reset blog views monthly'

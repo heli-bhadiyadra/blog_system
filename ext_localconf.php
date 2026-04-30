@@ -31,5 +31,11 @@ call_user_func(function () {
                 'create,update,delete'
         ]
     );
+    // Load TypoScript automatically
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
+        'ns_blog_system',
+        'setup',
+        "@import 'EXT:ns_blog_system/Configuration/TypoScript/setup.typoscript'"
+    );
 
 });

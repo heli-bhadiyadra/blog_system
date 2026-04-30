@@ -60,10 +60,26 @@ form div {
     margin-bottom: 10px;
 }
 </style>
-<h1>{blog.title}</h1>
+
+<!--Core Event-->
+<f:flashMessages as="flashMessages">
+    <f:for each="{flashMessages}" as="message">
+
+        <div class="alert alert-info d-flex align-items-center" role="alert">
+            <span style="font-size: 20px; margin-right: 8px;"></span>
+            
+            <div>
+                {message.message}
+            </div>
+        </div>
+
+    </f:for>
+</f:flashMessages>
 
 <!--Event-->
 <p><strong>Views:</strong> {blog.views}</p>
+
+<h1>{blog.title}</h1>
 
 <div class="blog-detail">
 
@@ -80,7 +96,7 @@ form div {
     </p>
 
 </div>
-<!---<h3>Add Comment</h3>
+<h3>Add Comment</h3>
 
 <f:form action="createComment" controller="Blog" method="post">
 
@@ -97,25 +113,8 @@ form div {
 
     <f:form.submit value="Submit Comment" />
 
-</f:form>-->
-<h3>Add Comment</h3>
-
-<f:form action="createComment" controller="Blog" extensionName="NsBlogSystem" pluginName="BlogList" object="{comment}" method="post">
-
-    <f:form.hidden name="blog" value="{blog.uid}" />
-
-    <label>Name</label>
-    <f:form.textfield property="name" required="1" />
-
-    <label>Email</label>
-    <f:form.textfield property="email" required="1" />
-
-    <label>Comment</label>
-    <f:form.textarea property="comment" required="1" />
-
-    <f:form.submit value="Submit Comment" />
-
 </f:form>
+
 
 <h3>Comments</h3>
 

@@ -22,19 +22,24 @@ use TYPO3\CMS\Core\Mail\FluidEmail;
 use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+
 class BlogController extends ActionController
 {
     protected BlogRepository $blogRepository;
 
     protected CommentRepository $commentRepository;
 
-    //Event
+
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher):void
     {
         $this->eventDispatcher = $eventDispatcher;
     }
+    
     public function injectBlogRepository(BlogRepository $blogRepository)
     {
         $this->blogRepository = $blogRepository;
@@ -71,7 +76,13 @@ class BlogController extends ActionController
     }
 
     public function showAction(Blog $blog): ResponseInterface
-    {
+    {   
+        //Core Event
+        $this->addFlashMessage(
+            'Blog "' . $blog->getTitle() . '" opened successfully!',
+            '',
+            ContextualFeedbackSeverity::INFO
+        );
         //Event
         $event = new AfterBlogViewedEvent($blog);
 
@@ -95,38 +106,60 @@ class BlogController extends ActionController
     }
 
     public function createCommentAction(Comment $comment): ResponseInterface
-    {
+    {   
         $blogUid = (int)$this->request->getArgument('blog');
         $blog = $this->blogRepository->findByIdentifier($blogUid);
 
         $comment->setBlog($blog);
         $comment->setApproved(false);
 
+        // Save comment
         $this->commentRepository->add($comment);
-
-        \TYPO3\CMS\Core\Utility\DebugUtility::debug('MAIL FUNCTION CALLED');
-
-        // SEND EMAIL TO ADMIN
-        $mail = GeneralUtility::makeInstance(FluidEmail::class);
         
-        $mail
-            ->to('admin@example.com') 
-            ->from('noreply@example.com')
-            ->subject('New Comment Posted')
-            ->format('html')
-            ->setTemplate('CommentNotification')
-            ->assignMultiple([
-                'blogTitle' => $blog->getTitle(),
-                'name' => $comment->getName(),
-                'email' => $comment->getEmail(),
-                'comment' => $comment->getComment()
-            ]);
+        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
+        )->persistAll();
+        
+        // View Mail using Fluid Template
+        $view = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Fluid\View\StandaloneView::class
+        );
 
-        GeneralUtility::makeInstance(MailerInterface::class)->send($mail);
+        $view->setTemplatePathAndFilename(
+            \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName(
+                'EXT:ns_blog_system/Resources/Private/Templates/Email/CommentNotification.html'
+            )
+        );
+
+        $view->assignMultiple([
+            'blogTitle' => $blog->getTitle(),
+            'name' => $comment->getName(),
+            'email' => $comment->getEmail(),
+            'comment' => $comment->getComment()
+        ]);
+
+        $htmlBody = $view->render();
+
+        // Send mail
+        $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\Mail\FluidEmail::class
+        );
+
+        $mail
+            ->to('admin@example.com')
+            ->from('noreply@example.com')
+            ->subject('New Comment Added')
+            ->html($htmlBody);
+
+        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\Mail\MailerInterface::class
+        )->send($mail);
 
         return $this->redirect('show', null, null, [
             'blog' => $blog->getUid()
         ]);
+        
+        
     }
     //Implement filtering by title
     public function filterAction(): \Psr\Http\Message\ResponseInterface

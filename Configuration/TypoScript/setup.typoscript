@@ -56,12 +56,6 @@ plugin.tx_nsblogsystem {
    settings {
       listPid = 18
    }
-   //for mail
-   view {
-      templateRootPaths.10 = EXT:ns_blog_system/Resources/Private/Templates/
-      partialRootPaths.10 = EXT:ns_blog_system/Resources/Private/Partials/
-      layoutRootPaths.10 = EXT:ns_blog_system/Resources/Private/Layouts/
-   }
 }
 plugin.tx_nsblogsystem_bloglist {
   features.skipDefaultArguments = 1
@@ -70,6 +64,9 @@ plugin.tx_nsblogsystem_bloglist {
   //View configuration
   view {
     format = html
+    templateRootPaths.10 = EXT:ns_blog_system/Resources/Private/Templates/
+    partialRootPaths.10 = EXT:ns_blog_system/Resources/Private/Partials/
+    layoutRootPaths.10 = EXT:ns_blog_system/Resources/Private/Layouts/
   }
 
   //Persistence configuration
