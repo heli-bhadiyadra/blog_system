@@ -37,5 +37,10 @@ call_user_func(function () {
         'setup',
         "@import 'EXT:ns_blog_system/Configuration/TypoScript/setup.typoscript'"
     );
+    
+    $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['default'] =
+        'EXT:ns_blog_system/Configuration/RTE/Default.yaml';
 
+    $GLOBALS['TYPO3_CONF_VARS']['BE']['stylesheets']['ns_blog'] =
+        'EXT:ns_blog_system/Resources/Public/Css/contents.css';
 });
