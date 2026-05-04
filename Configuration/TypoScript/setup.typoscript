@@ -57,6 +57,16 @@ plugin.tx_nsblogsystem {
       listPid = 18
    }
 }
+plugin.tx_news {
+  view {
+    templateRootPaths.10 = EXT:my_site_package/Resources/Private/Extensions/News/Templates/
+    partialRootPaths.10 = EXT:my_site_package/Resources/Private/Extensions/News/Partials/
+    layoutRootPaths.10 = EXT:my_site_package/Resources/Private/Extensions/News/Layouts/
+  }
+  settings {
+    detailPid = 123   
+  }
+}
 plugin.tx_nsblogsystem_bloglist {
   features.skipDefaultArguments = 1
   mvc.callDefaultActionIfActionCantBeResolved = 1

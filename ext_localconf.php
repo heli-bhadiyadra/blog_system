@@ -43,4 +43,13 @@ call_user_func(function () {
 
     $GLOBALS['TYPO3_CONF_VARS']['BE']['stylesheets']['ns_blog'] =
         'EXT:ns_blog_system/Resources/Public/Css/contents.css';
+
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][
+        \TYPO3\CMS\Backend\Template\Components\ButtonBar::class
+    ] = [
+        'className' => \NITSAN\NsBlogSystem\Xclass\ButtonBar::class
+    ];
+
+    $GLOBALS['TYPO3_CONF_VARS']['BE']['JavaScriptModules'][] = '@ns_blog_system/backend';
+    
 });
