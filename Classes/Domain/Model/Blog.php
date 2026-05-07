@@ -9,6 +9,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 use NITSAN\NsBlogSystem\Domain\Model\Comment;
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+
 /**
  * This file is part of the "blog_system" Extension for TYPO3 CMS.
  *
@@ -39,12 +41,15 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
-     * images
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @var ObjectStorage<FileReference>
      */
-    protected $images = null;
+    protected ObjectStorage $images;
+
+    public function __construct()
+    {
+        $this->comments = new ObjectStorage();
+        $this->images = new ObjectStorage();
+    }
 
     /**
      * createddate
@@ -54,19 +59,17 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $createddate = null;
 
     /**
-     * comments
-     *
-     * @var ObjectStorage<Comment>
+     * @var ObjectStorage<\NITSAN\NsBlogSystem\Domain\Model\Comment>
      */
-    protected $comments = null;
+    protected ObjectStorage $comments;
 
     public function initializeObject(): void
     {
-        if ($this->comments === null) {
-            $this->comments = new ObjectStorage();
-        }
+        $this->comments = $this->comments ?? new ObjectStorage();
+        $this->images = $this->images ?? new ObjectStorage();
     }
-
+    
+    
     /**
      * Returns the title
      *
@@ -110,24 +113,29 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the images
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @return ObjectStorage<FileReference>
      */
-    public function getImages()
+    public function getImages(): ObjectStorage
     {
         return $this->images;
     }
 
     /**
-     * Sets the images
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $images
-     * @return void
+     * @param ObjectStorage<FileReference> $images
      */
-    public function setImages(\TYPO3\CMS\Extbase\Domain\Model\FileReference $images)
+    public function setImages(ObjectStorage $images): void
     {
         $this->images = $images;
+    }
+
+    public function addImage(FileReference $image): void
+    {
+        $this->images->attach($image);
+    }
+
+    public function removeImage(FileReference $image): void
+    {
+        $this->images->detach($image);
     }
 
     /**

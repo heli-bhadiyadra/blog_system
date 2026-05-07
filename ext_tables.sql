@@ -7,6 +7,8 @@ CREATE TABLE tx_nsblogsystem_domain_model_blog (
     views int(11) DEFAULT 0 NOT NULL,
     slug varchar(2048) DEFAULT '' NOT NULL,
 
+    images int(11) unsigned NOT NULL default '0',
+    
     tstamp int(11) DEFAULT '0' NOT NULL,
     crdate int(11) DEFAULT '0' NOT NULL,
 

@@ -32,9 +32,9 @@
 
     <!-- Image -->
     <td>
-        <f:if condition="{blog.images}">
-            <f:image image="{blog.images}" width="120" />
-        </f:if>
+        <f:for each="{blog.images}" as="image">
+            <f:image image="{image}" width="120" />
+        </f:for>
     </td>
 
     <!-- Description -->
@@ -53,7 +53,7 @@
 
         <f:form action="delete" method="post" arguments="{blog: blog.uid}" style="display:inline-block">
 
-            <button type="button" class="delete-btn">
+            <button type="submit" class="delete-btn">
                 Delete
             </button>
 

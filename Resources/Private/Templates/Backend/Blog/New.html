@@ -55,7 +55,7 @@
 
 <h1>Create Blog</h1>
 
-<f:form action="create" objectName="blog" enctype="multipart/form-data">
+<f:form action="create" object="{blog}" objectName="blog" enctype="multipart/form-data">
 
     <label>Title</label>
     <f:form.textfield property="title" />
@@ -64,7 +64,7 @@
     <f:form.textarea property="description" />
 
     <label>Upload Image</label>
-    <f:form.upload property="images" />
+    <input type="file" name="image" />
 
     <div class="save-btn">
         <f:form.submit value="Save" />

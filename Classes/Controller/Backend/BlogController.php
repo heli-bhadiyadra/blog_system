@@ -11,6 +11,14 @@ use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
+
+use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Resource\StorageRepository;
+use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 class BlogController extends ActionController
 {
 
@@ -45,11 +53,60 @@ class BlogController extends ActionController
 
     public function newAction(): ResponseInterface
     {
+        $this->view->assign('blog', new Blog());
         return $this->htmlResponse();
+    }
+
+    public function initializeCreateAction(): void
+    {
+        if ($this->arguments->hasArgument('blog')) {
+            $propertyMappingConfiguration = $this->arguments
+                ->getArgument('blog')
+                ->getPropertyMappingConfiguration();
+
+            $propertyMappingConfiguration->allowAllProperties();
+        }
     }
 
     public function createAction(Blog $blog): ResponseInterface
     {
+         debug($blog);
+        $uploadedFiles = $this->request->getUploadedFiles();
+
+        if (!empty($uploadedFiles['images'])) {
+
+            $uploadedFile = $uploadedFiles['images'];
+
+            if ($uploadedFile->getError() === 0) {
+
+                $storage = GeneralUtility::makeInstance(StorageRepository::class)
+                    ->findByUid(1);
+
+                $folder = $storage->getRootLevelFolder();
+
+                $file = $storage->addUploadedFile(
+                    $uploadedFile,
+                    $folder,
+                    $uploadedFile->getClientFilename()
+                );
+
+                $sysFileReference = GeneralUtility::makeInstance(CoreFileReference::class, [
+                    'uid_local' => $file->getUid(),
+                    'uid_foreign' => 0,
+                    'tablenames' => 'tx_nsblogsystem_domain_model_blog',
+                    'fieldname' => 'images',
+                    'pid' => $blog->getPid(),
+                ]);
+
+                $fileReference = new FileReference();
+                $fileReference->setOriginalResource($sysFileReference);
+
+                $images = new ObjectStorage();
+                $images->attach($fileReference);
+
+                $blog->setImages($images);
+            }
+        }
         $this->blogRepository->add($blog);
         return $this->redirect('list');
     }

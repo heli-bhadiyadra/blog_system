@@ -85,9 +85,9 @@ form div {
 
     <p><f:format.stripTags>{blog.description}</f:format.stripTags></p>
 
-    <f:if condition="{blog.images}">
-        <f:image image="{blog.images}" width="600" />
-    </f:if>
+    <f:for each="{blog.images}" as="image">
+            <f:image image="{image}" width="300" />
+    </f:for>
 
     <p>
         <f:link.page pageUid="{settings.listPid}">
